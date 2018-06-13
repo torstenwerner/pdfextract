@@ -25,6 +25,8 @@ repositories {
 
 
 dependencies {
-    compile('org.springframework.boot:spring-boot-starter')
-    testCompile('org.springframework.boot:spring-boot-starter-test')
+    compile 'org.springframework.boot:spring-boot-starter',
+            'org.apache.pdfbox:pdfbox:2.0.9'
+
+    testCompile 'org.springframework.boot:spring-boot-starter-test'
 }
