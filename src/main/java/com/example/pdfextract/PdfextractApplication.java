@@ -26,12 +26,14 @@ public class PdfextractApplication implements ApplicationRunner {
         RandomAccessFile randomAccessFile = new RandomAccessFile(input, "r");
         PDFParser parser = new PDFParser(randomAccessFile);
         parser.parse();
-        COSDocument cosDoc = parser.getDocument();
-        PDDocument pdDoc = new PDDocument(cosDoc);
-        PDFTextStripper pdfStripper = new PDFTextStripper();
+        String parsedText;
+        try (COSDocument cosDoc = parser.getDocument()) {
+            PDDocument pdDoc = new PDDocument(cosDoc);
+            PDFTextStripper pdfStripper = new PDFTextStripper();
 //        pdfStripper.setStartPage(1);
 //        pdfStripper.setEndPage(5);
-        String parsedText = pdfStripper.getText(pdDoc);
+            parsedText = pdfStripper.getText(pdDoc);
+        }
         try (FileWriter writer = new FileWriter("samples/befruchtung-pdfbox.txt")) {
             writer.write(parsedText);
         }
