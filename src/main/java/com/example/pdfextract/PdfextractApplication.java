@@ -32,7 +32,8 @@ public class PdfextractApplication implements ApplicationRunner {
 //        pdfStripper.setStartPage(1);
 //        pdfStripper.setEndPage(5);
         String parsedText = pdfStripper.getText(pdDoc);
-        final FileWriter writer = new FileWriter("samples/befruchtung-pdfbox.txt");
-        writer.write(parsedText);
+        try (FileWriter writer = new FileWriter("samples/befruchtung-pdfbox.txt")) {
+            writer.write(parsedText);
+        }
     }
 }
